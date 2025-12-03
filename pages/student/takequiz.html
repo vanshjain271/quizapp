@@ -28,11 +28,12 @@
                         <button type="submit" class="button1">Next</button>
                     </form>
                 </div>
-                <div id="result-section" style="display:none;">
+                <div id="result-section" class="hidden">
+
                     <h3>Your Score: <span id="score"></span></h3>
                     <div id="feedback"></div>
-                    <p>Thank you for taking the quiz!</p>
-                    <a href="dashboards.html" class="button1">Back to Dashboard</a>
+                    <p>Thank you for taking the quiz!</p>   
+                    <a href="dashboards.html" class="button1" >Back to Dashboard</a>
                 </div>
                 <div id="loading">Loading quiz...</div>
             </div>
@@ -140,7 +141,7 @@
             body: JSON.stringify({ quiz_id: Number(quiz_id), answers })
         });
         document.getElementById('question-section').style.display = 'none';
-        document.getElementById('result-section').style.display = '';
+        document.getElementById('result-section').style.display = 'block';
         document.getElementById('score').textContent = `${score} / ${questions.length}`;
         let feedback = '';
         if (score === questions.length) {
@@ -151,8 +152,9 @@
             feedback = 'Keep practicing! You can do better next time.';
         }
         document.getElementById('feedback').textContent = feedback;
+         alert(`Score: ${score} / ${questions.length}`);
     }
-
+   
     fetchQuiz();
     </script>
 </body>

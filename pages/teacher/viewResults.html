@@ -22,7 +22,7 @@
             <h2>Student Results</h2>
             <div id="results-container">Loading results...</div>
             <div class="button">
-                <a href="dashboard.html" class="button1">Back to Dashboard</a>
+                <a href="dashboard.html" class="button1" style="text-decoration: none;">Back to Dashboard</a>
             </div>
         </div>
     </main>
@@ -72,9 +72,13 @@
     if (logoutLink) {
         logoutLink.addEventListener('click', function(event) {
             event.preventDefault();
+          const confirmLogout = confirm("Are you sure you want to logout?");
+            if (confirmLogout) {
+                alert("You have been logged out successfully."); 
             localStorage.removeItem('token');
             localStorage.removeItem('role');
             window.location.href = '../login.html';
+            }
         });
     }
     </script>

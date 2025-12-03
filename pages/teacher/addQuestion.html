@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Question</title>
     <link rel="stylesheet" href="/css/style1.css">
+    <link rel="stylesheet" href="/css/style11.css">
+    <link rel="stylesheet" href="/css/style2.css">
 </head>
 <body>
     <header>
@@ -43,7 +45,7 @@
                     <input type="text" id="option-d" required>
                 </div>
                 <div class="Qt">
-                    <label for="correct-option">Correct Option:</label>
+                    <label for="correct-option" style="margin-top:2.5%;">Correct Option: </label>
                     <select id="correct-option" required>
                         <option value="A">A</option>
                         <option value="B">B</option>
@@ -106,9 +108,13 @@
     if (logoutLink) {
         logoutLink.addEventListener('click', function(event) {
             event.preventDefault();
+            const confirmLogout = confirm("Are you sure you want to logout?");
+            if (confirmLogout) {
+                alert("You have been logged out successfully."); 
             localStorage.removeItem('token');
             localStorage.removeItem('role');
             window.location.href = '../login.html';
+            }
         });
     }
     </script>

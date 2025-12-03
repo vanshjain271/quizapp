@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Quiz</title>
     <link rel="stylesheet" href="../../css/style1.css">
+    <link rel="stylesheet" href="../../css/style11.css">
+    <link rel="stylesheet" href="../../css/style2.css">
 </head>
 
 <body>
@@ -31,9 +33,9 @@
                 <label for="description">Description</label>
                 <textarea id="description" required></textarea>
                 <label for="time-per-question">Time per Question</label>
-                <div style="display: flex; gap: 8px; align-items: center;">
-                    <input type="number" id="time-per-question" min="5" value="30" required style="width: 80px;" />
-                    <select id="time-unit">
+                <div style="display: flex; gap: 8px; align-items: center; justify-content: center;">
+                    <input type="number" id="time-per-question" min="5" value="30" required style="width: 80px; height: 40px; padding: 5px; font-size: 16px;" />
+                    <select id="time-unit" style="height: 40px; padding: 5px; font-size: 16px; margin-top: 2%;">
                         <option value="seconds">sec</option>
                         <option value="minutes">min</option>
                     </select>

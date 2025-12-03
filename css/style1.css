@@ -166,7 +166,7 @@ label {
     font-weight: 600;
     color: #1e2f55;
 }
-
+ 
 @media(max-width:768px){
 .navbar{
     padding: 0 2px;    
@@ -362,3 +362,39 @@ th {
     color: #555;
     font-size: 1em;
 }
+.hidden {
+    display: none;
+}
+
+#result-section {
+    display: none;
+    padding: 24px 10px;
+    text-align: center;
+}
+
+#result-section h3 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+#feedback {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: #3a4d7c;
+}
+
+#result-section p {
+    font-size: 1rem;
+    margin-bottom: 16px;
+    color: #555;
+}
+
+#result-section .button1 {
+    margin-top: 25px;
+    padding: 10px 28px;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
