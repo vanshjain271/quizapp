@@ -16,29 +16,20 @@ body{
 }
 
 .main{
-<<<<<<< HEAD
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 4vh;
+    overflow: hidden;
 }
+
 .left{
     height: 65vh;
     width: 300px;
     flex-shrink: 0;
-=======
-    display: flex; 
-    align-items: center;
-    justify-content: center; 
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-
-}
-.left{
-    height: 65vh;
-    width: 25vw;
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
     background-image: url("/assets/l1.png");
     background-size: cover;
     background-position: center;
@@ -46,14 +37,9 @@ body{
     border-top-left-radius: 4vh;
     display: flex;
     flex-direction: column;
-<<<<<<< HEAD
-    flex-wrap: wrap;
-=======
-    flex-wrap: wrap;    
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
     align-items: center;
-    /* color:#e6f0ff; */
     color: whitesmoke;
+    padding: 2rem;
 }
 
 .logo{
@@ -71,7 +57,6 @@ body{
     margin-bottom: 1rem;
 }
 
- 
 .content{
     text-align: left;
     font-size: 1rem;
@@ -81,32 +66,24 @@ body{
 
 .right{
     height: 65vh;
-<<<<<<< HEAD
     flex: 1;
-=======
-    width: 25vw;
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
     background-color: whitesmoke;
     border-bottom-right-radius: 4vh;
     border-top-right-radius: 4vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-<<<<<<< HEAD
-=======
-    flex-wrap: wrap;
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
     align-items: center;
     color:#111f3a;
-    padding: 0 2rem;
+    padding: 2rem;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
 }
- 
 
 .right h2{
     color: black;
     font-size: 2.5rem;
     margin:4rem 0rem 1rem;
-}      
+}
 
 .right h3{
      color: black;
@@ -121,61 +98,52 @@ body{
     margin-bottom: 2rem;
 }
 
-#username {
-    width: 90%;
-    height: 2rem;
-    border-radius: 0.5rem;
-    border: 1px solid #111f3a;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-}
-#password {
-    width: 90%;
-    height: 2rem;
-    border-radius: 0.5rem;
-    border: 1px solid #111f3a;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-}
-
-#username1, #password1 {
-    width: 90%;
-    height: 2rem;
-    border-radius: 0.5rem;
-    border: 1px solid #111f3a;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-}
-
 .form-group {
     width: 100%;
-<<<<<<< HEAD
-    font-size: 0.7rem;
-    display: block;
-}
-=======
-    height: 1rem;
-     font-size: .7rem;
-     display: flex;
-     justify-content: space-between;
-    }
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
-.form-checkbox {
     display: flex;
-    align-items: center;
-}
-#remember-me{
-     
-    height: 0.5rem;
-    border-radius: 0.5rem;
-    border: 1px solid #111f3a;
-    font-size: 1rem; 
+    flex-direction: column;
+    margin-bottom: 1rem;
 }
 
-.form-group p{
+.form-group label {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
     color: #111f3a;
-    font-size: 0.7rem;
-    margin-left: 0.5rem;
+}
+
+#username, #password, #confirmPassword {
+    width: 100%;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #111f3a;
+    font-size: 1rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+#role {
+    width: 100%;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #111f3a;
+    font-size: 1rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.form-check input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+.form-check label {
+    font-size: 0.8rem;
+    color: #111f3a;
 }
 
 .loginbtn{
@@ -183,7 +151,9 @@ body{
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-top: 1rem;
 }
+
 .logbtn{
     width: 80%;
     height: 2.5rem;
@@ -193,9 +163,6 @@ body{
     border-radius: 0.5rem;
     font-size: 1rem;
     cursor: pointer;
-    
-     
-    
 }
 
 .logbtn:hover{
@@ -204,461 +171,156 @@ body{
 
 #dha{
     margin-top: 1rem;
-}
-
-/* signup */
-.form-check{
     font-size: 0.8rem;
-    margin-bottom: 1rem;
 }
- 
 
-
-
+/* Responsive Design */
 @media(max-width:1240px) {
+    .left{
+        height: 50vh;
+        width: 35vw;
+    }
 
+    .left h2{
+        font-size: 1.5rem;
+    }
 
+    .content{
+        font-size: 0.8rem;
+        margin:0.5rem 0rem 2rem 1rem;
+    }
 
-.left{
-  
-    height: 50vh;
-    width: 35vw;
-    background-image: url("/assets/l1.png");
-    background-size: cover;
-    background-position: center;
-    border-bottom-left-radius: 4vh;
-    border-top-left-radius: 4vh;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;    
-    align-items: center;
-    /* color:#e6f0ff; */
-    color: whitesmoke;
-}
+    .right{
+        height: 50vh;
+        width: 35vw;
+    }
 
+    .right h2, .right h3{
+        font-size: 1.5rem;
+    }
 
-.left h2{
-    text-align: center;
-    font-size: 1.5rem;
-    margin-bottom: 0rem;
-}
+    .right p{
+        margin-bottom: .5rem;
+    }
 
- 
-.content{
-    text-align: left;
-    font-size: 0.8rem;
-    line-height: 1.5;
-    margin:0.5rem 0rem 2rem 1rem;
-}
-
-.right{
-    height: 50vh;
-    width: 35vw;
-    background-color: whitesmoke;
-    border-bottom-right-radius: 4vh;
-    border-top-right-radius: 4vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-    color:#111f3a;
-    padding: 0 2rem;
-}
- 
-
-.right h2{
-    color: black;
-    font-size: 1.5rem;
-    margin:2rem 0rem 1rem;
-}      
-
-.right h3{
-     color: black;
-    font-size: 1.5rem;
-    margin:2rem 0rem 1rem;
-}
-
-.right p{
-    text-align: center;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin-bottom: .5rem;
-}
-
-#username-label, #password-label {
-    font-size: 0.8rem;
-    color: #111f3a;
-    margin-bottom: 0.5rem;
-}
-
-<<<<<<< HEAD
-#username, #password, #confirmPassword, #role {
-    width: 100%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-    border: 1px solid #111f3a;
-    font-size: 0.8rem;
-=======
-#username,#password {
-    width: 90%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-    border: 1px solid #111f3a;
-    font-size: .8rem;
-    margin-bottom: 1rem;
-}
-#username1,#password1 {
-    width: 90%;
-    height: 1.5rem;
-    border-radius: 0.5rem;
-    border: 1px solid #111f3a;
-    font-size: .8rem;
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
-    margin-bottom: 1rem;
-}
-
+    #username, #password, #confirmPassword, #role {
+        height: 2rem;
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width:990px) {
-<<<<<<< HEAD
     #username, #password, #confirmPassword, #role {
-=======
-    #username1, #password1 {
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
-    width: 80%;
-    height: 1rem;
-    border-radius: 0.2rem;
-    border: 1px solid #111f3a;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-}
+        width: 100%;
+        height: 2rem;
+        font-size: 0.9rem;
+    }
+
     .form-check{
-    font-size: 0.7rem;
-    margin-bottom: 0.5rem;
-}
+        font-size: 0.7rem;
+    }
 
     .form-group p{
-    color: #111f3a;
-    font-size: 0.6rem;
-    margin-left: 0.4rem;
-}
+        font-size: 0.6rem;
+    }
 }
 
 @media(max-width:768px) {
- 
-.logo{
-    width: 10vw;
-    height: 7vh;
-    margin:2rem 0rem 1rem;
-    background-image: url("/assets/logo.png");
-    background-size: cover;
-    background-position: center;
-}    
-
-.left h2{
-    text-align: center;
-    font-size: 1rem;
-    
-}
-
-.content{
-    text-align: left;
-    font-size: 0.7rem;
-    line-height: 1.5;
-    margin:0.5rem 0rem 2rem 1rem;
-}
-
-.right h2{
-    color: black;
-    font-size: 1.3rem;
-    margin:2rem 0rem 1rem;
-}      
-
-.right h3{
-     color: black;
-    font-size: 1.3rem;
-    margin:2rem 0rem 1rem;
-}
-
-.right p{
-    text-align: center;
-    font-size: 0.7rem;
-    line-height: 1;
-    margin-bottom: .5rem;
-}
-
-#username-label, #password-label {
-    font-size: 0.8rem;
-    color: #111f3a;
-    margin-bottom: 0.5rem;
-}
-
-<<<<<<< HEAD
-#username, #password, #confirmPassword, #role {
-    width: 90%;
-    height: 1rem;
-    border-radius: 0.2rem;
-    border: 1px solid #111f3a;
-    font-size: 0.8rem;
-=======
-#username,#password {
-    width: 90%;
-    height: 1 rem;
-    border-radius: 0.5rem;
-    border: 1px solid #111f3a;
-    font-size: .8rem;
-    margin-bottom: 1rem;
-}
-#username1,#password1 {
-    width: 90%;
-    height: 1rem;
-    border-radius: 0.2rem;
-    border: 1px solid #111f3a;  
-    font-size: .8rem;
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
-    margin-bottom: 0.5rem;
-}
-.form-group {
-    width: 100%;
-<<<<<<< HEAD
-    font-size: 0.5rem;
-    display: block;
-}
-=======
-    height: 0.8rem;
-     font-size: .5rem;
-     display: flex;
-     justify-content: space-between;
+    .logo{
+        width: 10vw;
+        height: 7vh;
     }
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
-.form-checkbox {
-    display: flex;
-    align-items: center;
-}
- 
 
-.form-group p{
-    color: #111f3a;
-    font-size: 0.6rem;
-    margin-left: 0.2rem;
-}
+    .left h2{
+        font-size: 1rem;
+    }
 
-.loginbtn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-.logbtn{
-    width: 80%;
-    height: 1.5rem;
-    background-color: #111f3a;
-    color: whitesmoke;
-    border: none;
-    border-radius: 0.2rem;
-    font-size: 1rem;
-    cursor: pointer;
-    margin:1rem;
-     
-    
-}
+    .content{
+        font-size: 0.7rem;
+        margin:0.5rem 0rem 2rem 1rem;
+    }
 
-.reg{
-    margin-top: 0.2rem;
-}
+    .right h2, .right h3{
+        font-size: 1.3rem;
+    }
 
- #terms{
-     position: relative;
-     bottom: -2px;
-}
-#dha{
-    margin-top: 0.5rem;
-}
+    .right p{
+        font-size: 0.7rem;
+        margin-bottom: .5rem;
+    }
 
-/* signup */
-.form-check{
-    font-size: 0.6rem;
-    margin-bottom: 1rem;
-}
+    #username, #password, #confirmPassword, #role {
+        height: 2rem;
+        font-size: 0.8rem;
+    }
 
+    .form-group {
+        margin-bottom: 0.5rem;
+    }
+
+    .logbtn{
+        height: 2rem;
+        font-size: 0.9rem;
+    }
 }
 
 @media(max-width:480px) {
- .left{
-    height: 50vh;
-    width: 42vw;
-    background-image: url("/assets/l1.png");
-    background-size: cover;
-    background-position: center;
-    border-bottom-left-radius: 4vh;
-    border-top-left-radius: 4vh;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;    
-    align-items: center;
-    /* color:#e6f0ff; */
-    color: whitesmoke;
-}
-
-.logo{
-    width: 14vw;
-    height: 7vh;
-    margin:2rem 0rem 0.5rem;
-    background-image: url("/assets/logo.png");
-    background-size: cover;
-    background-position: center;
-}
-
-.left h2{
-    text-align: center;
-    font-size: 0.8rem;
-    margin-bottom: .5rem;
-    
-}
-
- 
-.content{
-    text-align: left;
-    font-size: 10px;
-}
-
-.content1{
-    font-size: 10px;
-}
-
-.right{
-    height: 50vh;
-    width: 42vw;
-    background-color: whitesmoke;
-    border-bottom-right-radius: 4vh;
-    border-top-right-radius: 4vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-    color:#111f3a;
-    padding: 0rem 1rem;
-}
- 
-
-.right h2{
-    color: black;
-    font-size: 1.5rem;
-    margin:2rem 0rem 0.5rem;
-}      
-
-.right h3{
-     color: black;
-    font-size: 1.5rem;
-    margin:2rem 0rem 1rem;
-}
-
-.right p{
-    text-align: center;
-    font-size: 0.7rem;
-    line-height: 1;
-    margin-bottom: 1rem;
-}
-
-<<<<<<< HEAD
-#username, #password, #confirmPassword, #role {
-=======
-#username, #password {
-    width: 80%;
-    height: 1rem;
-    border-radius: 0.3rem;
-    border: 1px solid #111f3a;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-}
- 
-
-#username1, #password1 {
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
-    width: 80%;
-    height: 1rem;
-    border-radius: 0.3rem;
-    border: 1px solid #111f3a;
-    font-size: 0.7rem;
-    margin-bottom: 0.3rem;
-}
-#username-label, #password-label{
-    font-size: 0.7rem;;
-}
-
-#ia{
-    font-size: 0.6rem;
-    margin-top: 1rem;
-}
-
-.form-group {
-    width: 100%;
-    height: 0.5rem;
-     font-size: .5rem;
-     display: block;
+    .left{
+        height: 50vh;
+        width: 42vw;
+        padding: 1rem;
     }
-.form-checkbox {
-    display: block;
-    
-}
- 
 
-#rm{
-    font-size: 0.7em;
-     
-}
+    .logo{
+        width: 14vw;
+        height: 7vh;
+        margin:1rem 0rem 0.5rem;
+    }
 
-.form-group p{
-    color: #111f3a;
-    font-size: 0.7rem;
-    margin-left: 0.5rem;
-}
+    .left h2{
+        font-size: 0.8rem;
+        margin-bottom: .5rem;
+    }
 
-.loginbtn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 10px;
-}
-.logbtn{
-    width: 80%;
-    height: 1.5rem;
-    background-color: #111f3a;
-    color: whitesmoke;
-    border: none;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    cursor: pointer;
-   
-     
-    
-}
+    .content{
+        font-size: 0.6rem;
+        margin:0.5rem 0rem 2rem 1rem;
+    }
 
-.logbtn:hover{
-    background-color: #000205;
-}
+    .right{
+        height: 50vh;
+        width: 42vw;
+        padding: 1rem;
+    }
 
-#dha{
-    margin-top: 0.4rem;
-}
+    .right h2, .right h3{
+        font-size: 1.2rem;
+        margin:1rem 0rem 0.5rem;
+    }
 
-#fp{
-    font-size: 0.5rem;  
-    text-align: left;
-    position: relative;
-    left: -15px;
-}
-#terms{
-     position: relative;
-     bottom: -2px;
-}
-/* signup */
-.form-check{
-    font-size: 0.8rem;
-    margin-bottom: 0.2rem;
-    margin-top: 0.4rem;
-}    
+    .right p{
+        font-size: 0.7rem;
+        margin-bottom: 1rem;
+    }
+
+    #username, #password, #confirmPassword, #role {
+        height: 2rem;
+        font-size: 0.8rem;
+        padding: 0 0.5rem;
+    }
+
+    .form-check{
+        font-size: 0.7rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .logbtn{
+        height: 2rem;
+        font-size: 0.9rem;
+    }
+
+    #dha{
+        margin-top: 0.5rem;
+        font-size: 0.7rem;
+    }
 }
