@@ -4,9 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>QuizIQ.com | Create Quiz</title>
 
     <!-- from /pages/teacher/createquiz.html to /css -->
+=======
+    <title>Create Quiz</title>
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
     <link rel="stylesheet" href="../../css/style1.css">
     <link rel="stylesheet" href="../../css/style11.css">
     <link rel="stylesheet" href="../../css/style2.css">
@@ -15,14 +19,22 @@
 <body>
     <header>
         <div class="navbar">
+<<<<<<< HEAD
             <!-- from /pages/teacher/ to /assets -->
             <img src="../../assets/logo.png" alt="Logo" class="logo" />
+=======
+            <img src="/assets/logo.png" alt="Logo" class="logo" />
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
             <div class="nav-links">
                 <a href="dashboards.html" class="logo1">Dashboard</a>
                 <a href="myresults.html" class="logo1">My Results</a>
                 <a href="myquizzes.html" class="logo1">My Quizzes</a>
                 <a href="createquiz.html" class="logo1">Create Quiz</a>
+<<<<<<< HEAD
                 <a href="../login.html" class="logo1" id="logout-link">Logout</a>
+=======
+                <a href="../login.html" class="logo1">Logout</a>
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
             </div>
         </div>
     </header>
@@ -33,6 +45,7 @@
             <form id="create-quiz-form">
                 <label for="title">Quiz Title</label>
                 <input type="text" id="title" required />
+<<<<<<< HEAD
 
                 <label for="description">Description</label>
                 <textarea id="description" required></textarea>
@@ -51,17 +64,29 @@
                         id="time-unit"
                         style="height: 40px; padding: 5px; font-size: 16px; margin-top: 2%;"
                     >
+=======
+                <label for="description">Description</label>
+                <textarea id="description" required></textarea>
+                <label for="time-per-question">Time per Question</label>
+                <div style="display: flex; gap: 8px; align-items: center; justify-content: center;">
+                    <input type="number" id="time-per-question" min="5" value="30" required style="width: 80px; height: 40px; padding: 5px; font-size: 16px;" />
+                    <select id="time-unit" style="height: 40px; padding: 5px; font-size: 16px; margin-top: 2%;">
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
                         <option value="seconds">sec</option>
                         <option value="minutes">min</option>
                     </select>
                 </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
                 <button type="submit" class="button1">Create Quiz</button>
             </form>
         </div>
     </main>
 
     <script>
+<<<<<<< HEAD
         const API_BASE_URL = "http://localhost:4000";
 
         // Teacher guard
@@ -157,3 +182,36 @@
 </body>
 
 </html>
+=======
+    document.getElementById('create-quiz-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const token = localStorage.getItem('token');
+        const title = document.getElementById('title').value;
+        const description = document.getElementById('description').value;
+        let time_per_question = parseInt(document.getElementById('time-per-question').value, 10);
+        const unit = document.getElementById('time-unit').value;
+        if (unit === 'minutes') time_per_question *= 60;
+        if (isNaN(time_per_question) || time_per_question < 5) {
+            alert('Please enter a valid time per question (minimum 5 seconds).');
+            return;
+        }
+        const res = await fetch('http://localhost:4000/api/quizzes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({ title, description, time_per_question })
+        });
+        const quiz = await res.json();
+        if (quiz && quiz.id) {
+            window.location.href = `addQuestion.html?quiz_id=${quiz.id}`;
+        } else {
+            alert('Failed to create quiz.');
+        }
+    });
+    </script>
+</body>
+
+</html>
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3

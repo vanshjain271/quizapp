@@ -16,6 +16,7 @@ body{
 }
 
 .main{
+<<<<<<< HEAD
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,6 +28,17 @@ body{
     height: 65vh;
     width: 300px;
     flex-shrink: 0;
+=======
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+
+}
+.left{
+    height: 65vh;
+    width: 25vw;
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
     background-image: url("/assets/l1.png");
     background-size: cover;
     background-position: center;
@@ -34,7 +46,11 @@ body{
     border-top-left-radius: 4vh;
     display: flex;
     flex-direction: column;
+<<<<<<< HEAD
     flex-wrap: wrap;
+=======
+    flex-wrap: wrap;    
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
     align-items: center;
     /* color:#e6f0ff; */
     color: whitesmoke;
@@ -65,13 +81,21 @@ body{
 
 .right{
     height: 65vh;
+<<<<<<< HEAD
     flex: 1;
+=======
+    width: 25vw;
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
     background-color: whitesmoke;
     border-bottom-right-radius: 4vh;
     border-top-right-radius: 4vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+<<<<<<< HEAD
+=======
+    flex-wrap: wrap;
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
     align-items: center;
     color:#111f3a;
     padding: 0 2rem;
@@ -125,9 +149,17 @@ body{
 
 .form-group {
     width: 100%;
+<<<<<<< HEAD
     font-size: 0.7rem;
     display: block;
 }
+=======
+    height: 1rem;
+     font-size: .7rem;
+     display: flex;
+     justify-content: space-between;
+    }
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
 .form-checkbox {
     display: flex;
     align-items: center;
@@ -260,19 +292,40 @@ body{
     margin-bottom: 0.5rem;
 }
 
+<<<<<<< HEAD
 #username, #password, #confirmPassword, #role {
     width: 100%;
     height: 1.5rem;
     border-radius: 0.5rem;
     border: 1px solid #111f3a;
     font-size: 0.8rem;
+=======
+#username,#password {
+    width: 90%;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #111f3a;
+    font-size: .8rem;
+    margin-bottom: 1rem;
+}
+#username1,#password1 {
+    width: 90%;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #111f3a;
+    font-size: .8rem;
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
     margin-bottom: 1rem;
 }
 
 }
 
 @media (max-width:990px) {
+<<<<<<< HEAD
     #username, #password, #confirmPassword, #role {
+=======
+    #username1, #password1 {
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
     width: 80%;
     height: 1rem;
     border-radius: 0.2rem;
@@ -341,19 +394,44 @@ body{
     margin-bottom: 0.5rem;
 }
 
+<<<<<<< HEAD
 #username, #password, #confirmPassword, #role {
     width: 90%;
     height: 1rem;
     border-radius: 0.2rem;
     border: 1px solid #111f3a;
     font-size: 0.8rem;
+=======
+#username,#password {
+    width: 90%;
+    height: 1 rem;
+    border-radius: 0.5rem;
+    border: 1px solid #111f3a;
+    font-size: .8rem;
+    margin-bottom: 1rem;
+}
+#username1,#password1 {
+    width: 90%;
+    height: 1rem;
+    border-radius: 0.2rem;
+    border: 1px solid #111f3a;  
+    font-size: .8rem;
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
     margin-bottom: 0.5rem;
 }
 .form-group {
     width: 100%;
+<<<<<<< HEAD
     font-size: 0.5rem;
     display: block;
 }
+=======
+    height: 0.8rem;
+     font-size: .5rem;
+     display: flex;
+     justify-content: space-between;
+    }
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
 .form-checkbox {
     display: flex;
     align-items: center;
@@ -484,7 +562,21 @@ body{
     margin-bottom: 1rem;
 }
 
+<<<<<<< HEAD
 #username, #password, #confirmPassword, #role {
+=======
+#username, #password {
+    width: 80%;
+    height: 1rem;
+    border-radius: 0.3rem;
+    border: 1px solid #111f3a;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+ 
+
+#username1, #password1 {
+>>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
     width: 80%;
     height: 1rem;
     border-radius: 0.3rem;
