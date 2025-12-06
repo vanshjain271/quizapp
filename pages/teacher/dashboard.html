@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizIQ.com | Teacher Dashboard</title>
+
+    <!-- path from /pages/teacher/dashboards.html to /css -->
+    <link rel="stylesheet" href="../../css/style1.css">
+
+    <style>
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 2px;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <!-- path from /pages/teacher/ to /assets -->
+            <img src="../../assets/logo.png" alt="Logo" class="logo" />
+            <div class="nav-links">
+                <a href="dashboards.html" class="logo1">Dashboard</a>
+                <a href="createquiz.html" class="logo1">Create Quiz</a>
+                <a href="../login.html" class="logo1" id="logout-link">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div id="teacher-quizzes"></div>
+    </main>
+
+    <script src="../../js/common.js"></script>
+    <script>
+
+        async function loadTeacherQuizzes() {
+            if (!ensureTeacher()) return;
+
+            const token = localStorage.getItem('token');
+            const container = document.getElementById('teacher-quizzes');
+            container.innerHTML = '<p style="text-align:center;margin-top:1rem;">Loading your quizzes...</p>';
+
+            try {
+                const res = await api('/api/quizzes/my');
+
+                if (!res.ok) {
+                    if (res.status === 401) {
+                        alert('Your session has expired. Please log in again.');
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('role');
+                        window.location.href = '../login.html';
+                        return;
+                    }
+                    throw new Error('Failed to load quizzes');
+                }
+
+                const quizzes = await res.json();
+
+                if (!Array.isArray(quizzes) || quizzes.length === 0) {
+                    container.innerHTML = `
+                        <h3>Your Quizzes</h3>
+                        <p>You haven't created any quizzes yet.
+                        <a href="createquiz.html">Create your first quiz!</a></p>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = '<h3 style="text-align: center; margin-top:1%;">Your Quizzes</h3>';
+
+                quizzes.forEach(q => {
+                    container.innerHTML += `
+                        <div class="box">
+                            <p><b>${q.title}</b></p>
+                            <p class="quiz-description">${q.description || ''}</p>
+                            <div class="button">
+                                <a href="addQuestion.html?quiz_id=${q.id}" class="button1" style="text-decoration: none;">Add Question</a>
+                                <a href="viewTest.html?quiz_id=${q.id}" class="button1" style="text-decoration: none;">View Test</a>
+                                <a href="viewResults.html?quiz_id=${q.id}" class="button1" style="text-decoration: none;">View Results</a>
+                                <button onclick="deleteQuiz(${q.id}, '${q.title.replace(/'/g, "\\'")}')" class="button1" style="background:#dc3545; text-decoration:none;">Delete Quiz</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (err) {
+                console.error('Error loading quizzes:', err);
+                container.innerHTML = '<h3>Error</h3><p>Failed to load quizzes. Please try again.</p>';
+            }
+        }
+
+        async function deleteQuiz(quizId, quizTitle) {
+            if (!ensureTeacher()) return;
+
+            if (!confirm(`Are you sure you want to delete the quiz "${quizTitle}"? This will also delete all questions and responses for this quiz.`)) {
+                return;
+            }
+
+            const token = localStorage.getItem('token');
+
+            try {
+                const res = await api(`/api/quizzes/${quizId}`, 'DELETE');
+
+                const data = await res.json().catch(() => ({}));
+
+                if (!res.ok) {
+                    if (res.status === 401) {
+                        alert('Your session has expired. Please log in again.');
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('role');
+                        window.location.href = '../login.html';
+                        return;
+                    }
+
+                    throw new Error(data.error || 'Failed to delete quiz');
+                }
+
+                alert('Quiz deleted successfully!');
+                loadTeacherQuizzes();
+            } catch (err) {
+                console.error(err);
+                alert('Failed to delete quiz: ' + err.message);
+            }
+        }
+
+        // Logout handler
+        const logoutLink = document.getElementById('logout-link');
+        if (logoutLink) {
+            logoutLink.addEventListener('click', function (event) {
+                event.preventDefault();
+                const confirmLogout = confirm("Are you sure you want to logout?");
+                if (confirmLogout) {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('role');
+                    alert("You have been logged out successfully.");
+                    window.location.href = '../login.html';
+                }
+            });
+        }
+
+        // Initial load
+        loadTeacherQuizzes();
+    </script>
+</body>
+</html>
