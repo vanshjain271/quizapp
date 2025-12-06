@@ -1,45 +1,39 @@
 Quiz Management System – Full Stack Project
 
-A fully working quiz platform with:
+A fully working quiz platform built for learning, portfolio showcase, and real usage.
 
-✔ Teacher & student roles
-✔ Authentication with JWT
-✔ Create quizzes
-✔ Add questions
-✔ Attempt quiz & auto scoring
-✔ SQLite storage
-✔ Browser UI (HTML/CSS/JS frontend)
-✔ Node.js backend API
-
-Built for learning purpose & portfolio use.
-
+✔️ Teacher & student roles
+✔️ Authentication with JWT
+✔️ Quiz creation & auto-scoring
+✔️ SQLite storage
+✔️ Browser UI + Node API backend
 🚀 Features
 👩‍🏫 Teacher Role
 
-✔ Login/signup
-✔ Create new quiz
+✔ Login / Signup
+✔ Create quizzes
 ✔ Add questions
-✔ View quiz responses & scores
+✔ View submitted results & scores
 
 👨‍🎓 Student Role
 
-✔ Login/signup
+✔ Login / Signup
 ✔ Attempt quizzes
-✔ Auto scoring
-✔ View submitted results
+✔ Auto-scoring
+✔ View score history
 
 🏗️ Tech Stack
-Backend:
+🔹 Backend
 
 Node.js
 
 Express.js
 
-SQLite3 (local DB)
+SQLite
 
 JWT Authentication
 
-Frontend:
+🔹 Frontend
 
 HTML
 
@@ -48,29 +42,25 @@ CSS
 JavaScript (Fetch API calls)
 
 📌 Project Structure
-Quiz/
- ├─ backend/               # API server code
- │   ├─ routes/            # API routes
- │   ├─ middleware/        # Auth middleware
- │   ├─ quiz.db            # SQLite database
- │   └─ index.js           # server entry
- │
- ├─ pages/                 # frontend UI screens
- ├─ css/                   # styling
- ├─ index.html             # redirects UI to login
- ├─ README.md              # documentation
-└─ package.json
+quiz/
+├── backend/             # API server
+│   ├── routes/          # Endpoints
+│   ├── middleware/      # Auth logic
+│   ├── quiz.db          # SQLite database
+│   └── index.js         # Server entry
+│
+├── pages/               # UI screens
+├── css/                 # Styling
+├── index.html           # Landing -> redirects login
+├── README.md            # Documentation
+└── package.json
 
 ⚙️ Installation & Setup
-🔹 1️⃣ Install Node.js (Required)
+🔹 1️⃣ Install Node.js
 
-Download & install from
-👉 https://nodejs.org/
+Download → https://nodejs.org/
 
 🔹 2️⃣ Backend Setup
-
-Open terminal in project folder:
-
 cd backend
 npm install
 npm start
@@ -82,44 +72,45 @@ Server running on port 4000
 SQLite database connected.
 
 
-✔ Keep this terminal open — backend must stay running.
+➡ Keep this terminal open – backend must stay running!
 
 🔹 3️⃣ Run Frontend
 
-Just open index.html
+Just open:
 
-Double-click it
-OR
-
-Run:
-
-open index.html
+index.html
 
 
-Browser opens → redirects to login page.
+double-click
 
-🔑 Default Login Credentials
-Teacher
-Email: test@example.com
-Password: 123456
+or open via VS Code Live Server
 
+Frontend redirects to login automatically.
 
-If not created, register a teacher using signup screen.
+🔑 Default Credentials
+👨‍🏫 Teacher Account
 
-📌 API Test (Optional for developers)
+Email : test@example.com
+Password : 123456
 
-Example curl request (login):
+(or simply register a new teacher)
+
+📌 API Test (Optional)
+
+Example login request:
 
 curl -X POST http://localhost:4000/api/auth/login \
--H "Content-Type: application/json" \
--d '{"email":"test@example.com","password":"123456"}'
+     -H "Content-Type: application/json" \
+     -d '{"email":"test@example.com","password":"123456"}'
 
-📊 Database Used
+🗄️ Database
 
-✔ SQLite
-📌 backend/quiz.db auto-creates on first run.
+SQLite local — auto-generated file:
 
-Tables:
+backend/quiz.db
+
+
+Tables include:
 
 users
 
@@ -129,47 +120,36 @@ questions
 
 responses
 
-📌 Notes
+✨ Screenshot Section
 
-✔ Works on Windows, Mac & Linux
-✔ No external DB needed
-✔ Node.js + SQLite = lightweight project
+(Add UI Pictures here)
 
-✨ Screenshots (Add yours)
+Login page
 
-➡ Login page
-➡ Teacher dashboard
-➡ Student quiz UI
+Teacher dashboard
 
-👨‍💻 Developer Guide
+Student quiz UI
 
-Want to extend?
+👨‍💻 Developer Ideas / Roadmap
 
-Suggested improvements:
-
-✔ Add admin dashboard
-✔ Add quiz timer
-✔ Add MCQ UI polish
+✔ Admin role
+✔ Quiz timer
+✔ UI polish
 ✔ Export results
-✔ Deploy on render/railway
+✔ Cloud deployment (Render / Railway)
 
 🤝 Contributing
 
-Pull requests welcome.
+Pull requests welcome ✨
 
 📄 License
 
-MIT License — free to use & upgrade.
+MIT License — open for usage & improvement.
 
-🎉 Done!
-
-Now steps to push git:
-
-1️⃣ Create repo on GitHub
-2️⃣ in terminal:
+🔥 Git Push Instructions (for beginners)
 git init
 git add .
 git commit -m "Initial Quiz project"
 git branch -M main
-git remote add origin <your-repo-url>
+git remote add origin https://github.com/your-repo.git
 git push -u origin main
