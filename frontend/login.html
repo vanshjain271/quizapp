@@ -55,10 +55,11 @@
                 const res = await api('/api/auth/login', 'POST', { email, password });
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.error || 'Login failed');
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('role', data.role);
-                alert('Logged in as ' + data.role);
-                if (data.role === 'teacher') {
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("role", data.user.role);
+                localStorage.setItem("userId", data.user.id);
+                alert('Logged in as ' + data.user.role);
+                if (data.user.role === 'teacher') {
                     window.location.href = 'teacher/dashboard.html';
                 } else {
                     window.location.href = 'student/dashboards.html';

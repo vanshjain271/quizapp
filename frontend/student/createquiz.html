@@ -126,14 +126,7 @@
             }
 
             try {
-                const res = await fetch(`${API_BASE_URL}/api/quizzes`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token
-                    },
-                    body: JSON.stringify({ title, description, time_per_question })
-                });
+                const res = await api('/api/quizzes', 'POST', { title, description, time_per_question }, true);
 
                 const data = await res.json().catch(() => ({}));
 

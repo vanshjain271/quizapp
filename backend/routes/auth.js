@@ -25,7 +25,7 @@ function runAsync(db, sql, params = []) {
 }
 
 // Signup
-router.post('/signup', async (req, res) => {
+router.post('/register', async (req, res) => {
   const db = req.app.locals.db;
   const { email, password, role } = req.body;
 

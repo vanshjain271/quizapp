@@ -51,7 +51,7 @@
     let timerInterval = null;
 
     async function fetchQuiz() {
-        const res = await fetch(`http://localhost:4000/api/questions/${quiz_id}`);
+        const res = await api(`/api/questions/${quiz_id}`);
         const data = await res.json();
         if (!data || !Array.isArray(data.questions) || data.questions.length === 0) {
             document.getElementById('loading').textContent = 'No questions found for this quiz.';
@@ -132,8 +132,7 @@
             window.location.href = '../login.html';
             return;
         }
-        await fetch('http://localhost:4000/api/responses', {
-            method: 'POST',
+        await api('/api/responses', 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
