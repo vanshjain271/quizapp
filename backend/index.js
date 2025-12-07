@@ -1,9 +1,13 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const { Low, JSONFile } = require("lowdb");
-const { nanoid } = require("nanoid");
 const path = require("path");
+
+// Correct LowDB imports
+const { Low } = require("lowdb");
+const { JSONFile } = require("lowdb/node");
+
+const { nanoid } = require("nanoid");
 
 const app = express();
 app.use(
@@ -13,8 +17,10 @@ app.use(
 );
 app.use(express.json());
 
-const dbFile = new JSONFile(path.join(__dirname, "data", "db.json"));
-const db = new Low(dbFile);
+// LowDB Database File Path
+const dbPath = path.join(__dirname, "data", "db.json");
+const adapter = new JSONFile(dbPath);
+const db = new Low(adapter);
 
 async function initDB() {
   await db.read();
@@ -25,18 +31,19 @@ async function initDB() {
     responses: []
   };
   await db.write();
-  console.log("🔥 JSON Database loaded");
+  console.log("🔥 JSON Database loaded at", dbPath);
 }
 initDB();
 
+// Attach DB and nanoid to routes
 app.locals.db = db;
 app.locals.nanoid = nanoid;
 
-// Health check (important for Railway / Render)
+// Health check route (important for Render)
 app.get("/", (req, res) => {
   res.json({
     status: "Backend Running",
-    database: "SQLite OK",
+    database: "JSON OK",
   });
 });
 
