@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const Database = require("better-sqlite3");
+const { Low, JSONFile } = require("lowdb");
+const { nanoid } = require("nanoid");
 const path = require("path");
 
 const app = express();
@@ -12,71 +13,24 @@ app.use(
 );
 app.use(express.json());
 
-// Detect DB path based on deployment environment
-let dbPath;
+const dbFile = new JSONFile(path.join(__dirname, "data", "db.json"));
+const db = new Low(dbFile);
 
-// If Railway/Render path exists, use persistent volume path
-const persistentPath = "/app/backend/data/quiz.db";
-
-if (process.env.RAILWAY_ENVIRONMENT || process.env.RENDER) {
-  dbPath = persistentPath;
-  console.log("⚡ Using persistent volume DB:", dbPath);
-} else {
-  // Local development path
-  dbPath = path.join(__dirname, "data", "quiz.db");
-  console.log("🛑 Using local DB:", dbPath);
+async function initDB() {
+  await db.read();
+  db.data ||= {
+    users: [],
+    quizzes: [],
+    questions: [],
+    responses: []
+  };
+  await db.write();
+  console.log("🔥 JSON Database loaded");
 }
+initDB();
 
-// Create / connect SQLite DB
-let db;
-try {
-  db = new Database(dbPath);
-  console.log("🔥 better-sqlite3 connected at", dbPath);
-} catch (err) {
-  console.error("❌ Failed connecting DB:", err);
-}
-
-// Initialize tables
-db.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL,
-    role TEXT NOT NULL DEFAULT 'student'
-  );
-
-  CREATE TABLE IF NOT EXISTS quizzes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL,
-    description TEXT,
-    time_per_question INTEGER DEFAULT 30,
-    created_by INTEGER,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (created_by) REFERENCES users(id)
-  );
-
-  CREATE TABLE IF NOT EXISTS questions (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    quiz_id INTEGER,
-    question_text TEXT NOT NULL,
-    options TEXT NOT NULL,
-    correct_option INTEGER NOT NULL,
-    FOREIGN KEY (quiz_id) REFERENCES quizzes(id)
-  );
-
-  CREATE TABLE IF NOT EXISTS responses (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    quiz_id INTEGER,
-    user_id INTEGER,
-    answers TEXT NOT NULL,
-    submitted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (quiz_id) REFERENCES quizzes(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
-  );
-`);
-
-// Attach db to routes
 app.locals.db = db;
+app.locals.nanoid = nanoid;
 
 // Health check (important for Railway / Render)
 app.get("/", (req, res) => {

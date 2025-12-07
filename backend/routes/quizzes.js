@@ -10,25 +10,10 @@ const quizSchema = Joi.object({
   time_per_question: Joi.number().integer().min(5).default(30),
 });
 
-// Helper: better-sqlite3 synchronous
-function getAsync(db, sql, params = []) {
-  const stmt = db.prepare(sql);
-  return stmt.get(...params);
-}
-
-function allAsync(db, sql, params = []) {
-  const stmt = db.prepare(sql);
-  return stmt.all(...params);
-}
-
-function runAsync(db, sql, params = []) {
-  const stmt = db.prepare(sql);
-  return stmt.run(...params);
-}
-
 // Create a quiz (teachers and students)
 router.post('/', authenticate, async (req, res) => {
   const db = req.app.locals.db;
+  const nanoid = req.app.locals.nanoid;
 
   const { error } = quizSchema.validate(req.body);
   if (error) return res.status(400).json({ error: error.details[0].message });
@@ -37,17 +22,17 @@ router.post('/', authenticate, async (req, res) => {
   const created_by = req.user.id;
 
   try {
-    const info = await runAsync(
-      db,
-      'INSERT INTO quizzes (title, description, time_per_question, created_by) VALUES (?, ?, ?, ?)',
-      [title, description, time_per_question, created_by]
-    );
+    const quiz = {
+      id: nanoid(),
+      title,
+      description,
+      time_per_question,
+      created_by,
+      created_at: new Date().toISOString()
+    };
 
-    const quiz = await getAsync(
-      db,
-      'SELECT * FROM quizzes WHERE id = ?',
-      [info.lastID]
-    );
+    db.data.quizzes.push(quiz);
+    await db.write();
 
     res.json(quiz);
   } catch (err) {
@@ -60,11 +45,10 @@ router.post('/', authenticate, async (req, res) => {
 router.get('/', async (req, res) => {
   const db = req.app.locals.db;
   try {
-    const quizzes = await allAsync(
-      db,
-      'SELECT q.* FROM quizzes q JOIN users u ON q.created_by = u.id WHERE u.role = ?',
-      ['teacher']
-    );
+    const quizzes = db.data.quizzes.filter(q => {
+      const user = db.data.users.find(u => u.id === q.created_by);
+      return user && user.role === 'teacher';
+    });
     res.json(quizzes);
   } catch (err) {
     console.error('Get quizzes error:', err);
@@ -78,11 +62,7 @@ router.get('/my', authenticate, async (req, res) => {
   const user_id = req.user.id;
 
   try {
-    const quizzes = await allAsync(
-      db,
-      'SELECT * FROM quizzes WHERE created_by = ?',
-      [user_id]
-    );
+    const quizzes = db.data.quizzes.filter(q => q.created_by === user_id);
     res.json(quizzes);
   } catch (err) {
     console.error('Get my quizzes error:', err);
@@ -97,15 +77,13 @@ router.delete('/:quiz_id', authenticate, async (req, res) => {
   const user_id = req.user.id;
 
   try {
-    const quiz = await getAsync(
-      db,
-      'SELECT * FROM quizzes WHERE id = ?',
-      [quiz_id]
-    );
+    const quizIndex = db.data.quizzes.findIndex(q => q.id === quiz_id);
 
-    if (!quiz) {
+    if (quizIndex === -1) {
       return res.status(404).json({ error: 'Quiz not found' });
     }
+
+    const quiz = db.data.quizzes[quizIndex];
 
     if (quiz.created_by !== user_id) {
       return res
@@ -114,25 +92,15 @@ router.delete('/:quiz_id', authenticate, async (req, res) => {
     }
 
     // Delete questions
-    await runAsync(
-      db,
-      'DELETE FROM questions WHERE quiz_id = ?',
-      [quiz_id]
-    );
+    db.data.questions = db.data.questions.filter(q => q.quiz_id !== quiz_id);
 
     // Delete responses
-    await runAsync(
-      db,
-      'DELETE FROM responses WHERE quiz_id = ?',
-      [quiz_id]
-    );
+    db.data.responses = db.data.responses.filter(r => r.quiz_id !== quiz_id);
 
     // Delete quiz
-    await runAsync(
-      db,
-      'DELETE FROM quizzes WHERE id = ?',
-      [quiz_id]
-    );
+    db.data.quizzes.splice(quizIndex, 1);
+
+    await db.write();
 
     res.json({ message: 'Quiz deleted successfully' });
   } catch (err) {
