@@ -11,30 +11,18 @@ const responseSchema = Joi.object({
 
 // Helpers
 function runAsync(db, sql, params = []) {
-  return new Promise((resolve, reject) => {
-    db.run(sql, params, function (err) {
-      if (err) reject(err);
-      else resolve(this);
-    });
-  });
+  const stmt = db.prepare(sql);
+  return stmt.run(...params);
 }
 
 function getAsync(db, sql, params = []) {
-  return new Promise((resolve, reject) => {
-    db.get(sql, params, (err, row) => {
-      if (err) reject(err);
-      else resolve(row);
-    });
-  });
+  const stmt = db.prepare(sql);
+  return stmt.get(...params);
 }
 
 function allAsync(db, sql, params = []) {
-  return new Promise((resolve, reject) => {
-    db.all(sql, params, (err, rows) => {
-      if (err) reject(err);
-      else resolve(rows);
-    });
-  });
+  const stmt = db.prepare(sql);
+  return stmt.all(...params);
 }
 
 // Submit quiz response

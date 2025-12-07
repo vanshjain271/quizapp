@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const sqlite3 = require("sqlite3").verbose();
+const Database = require("better-sqlite3");
 const path = require("path");
 
 const app = express();
@@ -28,60 +28,52 @@ if (process.env.RAILWAY_ENVIRONMENT || process.env.RENDER) {
 }
 
 // Create / connect SQLite DB
-const db = new sqlite3.Database(dbPath, (err) => {
-  if (err) {
-    console.error("❌ DB connection error:", err);
-  } else {
-    console.log("✅ SQLite database connected at", dbPath);
-  }
-});
+let db;
+try {
+  db = new Database(dbPath);
+  console.log("🔥 better-sqlite3 connected at", dbPath);
+} catch (err) {
+  console.error("❌ Failed connecting DB:", err);
+}
 
 // Initialize tables
-db.serialize(() => {
-  db.run(`
-    CREATE TABLE IF NOT EXISTS users (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      email TEXT UNIQUE NOT NULL,
-      password TEXT NOT NULL,
-      role TEXT NOT NULL DEFAULT 'student'
-    )
-  `);
+db.exec(`
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    role TEXT NOT NULL DEFAULT 'student'
+  );
 
-  db.run(`
-    CREATE TABLE IF NOT EXISTS quizzes (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      title TEXT NOT NULL,
-      description TEXT,
-      time_per_question INTEGER DEFAULT 30,
-      created_by INTEGER,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (created_by) REFERENCES users(id)
-    )
-  `);
+  CREATE TABLE IF NOT EXISTS quizzes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    description TEXT,
+    time_per_question INTEGER DEFAULT 30,
+    created_by INTEGER,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (created_by) REFERENCES users(id)
+  );
 
-  db.run(`
-    CREATE TABLE IF NOT EXISTS questions (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      quiz_id INTEGER,
-      question_text TEXT NOT NULL,
-      options TEXT NOT NULL,
-      correct_option INTEGER NOT NULL,
-      FOREIGN KEY (quiz_id) REFERENCES quizzes(id)
-    )
-  `);
+  CREATE TABLE IF NOT EXISTS questions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    quiz_id INTEGER,
+    question_text TEXT NOT NULL,
+    options TEXT NOT NULL,
+    correct_option INTEGER NOT NULL,
+    FOREIGN KEY (quiz_id) REFERENCES quizzes(id)
+  );
 
-  db.run(`
-    CREATE TABLE IF NOT EXISTS responses (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      quiz_id INTEGER,
-      user_id INTEGER,
-      answers TEXT NOT NULL,
-      submitted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (quiz_id) REFERENCES quizzes(id),
-      FOREIGN KEY (user_id) REFERENCES users(id)
-    )
-  `);
-});
+  CREATE TABLE IF NOT EXISTS responses (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    quiz_id INTEGER,
+    user_id INTEGER,
+    answers TEXT NOT NULL,
+    submitted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (quiz_id) REFERENCES quizzes(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+  );
+`);
 
 // Attach db to routes
 app.locals.db = db;

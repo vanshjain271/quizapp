@@ -10,32 +10,20 @@ const quizSchema = Joi.object({
   time_per_question: Joi.number().integer().min(5).default(30),
 });
 
-// Helper: Promisify sqlite3
+// Helper: better-sqlite3 synchronous
 function getAsync(db, sql, params = []) {
-  return new Promise((resolve, reject) => {
-    db.get(sql, params, (err, row) => {
-      if (err) reject(err);
-      else resolve(row);
-    });
-  });
+  const stmt = db.prepare(sql);
+  return stmt.get(...params);
 }
 
 function allAsync(db, sql, params = []) {
-  return new Promise((resolve, reject) => {
-    db.all(sql, params, (err, rows) => {
-      if (err) reject(err);
-      else resolve(rows);
-    });
-  });
+  const stmt = db.prepare(sql);
+  return stmt.all(...params);
 }
 
 function runAsync(db, sql, params = []) {
-  return new Promise((resolve, reject) => {
-    db.run(sql, params, function (err) {
-      if (err) reject(err);
-      else resolve(this); // this.lastID, this.changes
-    });
-  });
+  const stmt = db.prepare(sql);
+  return stmt.run(...params);
 }
 
 // Create a quiz (teachers and students)
