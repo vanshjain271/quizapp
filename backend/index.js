@@ -5,17 +5,36 @@ const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // allow all origins - later restrict if needed
+  })
+);
 app.use(express.json());
 
+// Detect DB path based on deployment environment
+let dbPath;
+
+// If Railway/Render path exists, use persistent volume path
+const persistentPath = "/app/backend/data/quiz.db";
+
+if (process.env.RAILWAY_ENVIRONMENT || process.env.RENDER) {
+  dbPath = persistentPath;
+  console.log("⚡ Using persistent volume DB:", dbPath);
+} else {
+  // Local development path
+  dbPath = path.join(__dirname, "data", "quiz.db");
+  console.log("🛑 Using local DB:", dbPath);
+}
+
 // Create / connect SQLite DB
-const db = new sqlite3.Database(
-  path.join(__dirname, "quiz.db"),
-  (err) => {
-    if (err) console.error("DB connection error:", err);
-    else console.log("SQLite database connected.");
+const db = new sqlite3.Database(dbPath, (err) => {
+  if (err) {
+    console.error("❌ DB connection error:", err);
+  } else {
+    console.log("✅ SQLite database connected at", dbPath);
   }
-);
+});
 
 // Initialize tables
 db.serialize(() => {
@@ -64,12 +83,15 @@ db.serialize(() => {
   `);
 });
 
-// Attach db to app routes
+// Attach db to routes
 app.locals.db = db;
 
-// Health check
+// Health check (important for Railway / Render)
 app.get("/", (req, res) => {
-  res.send("Quiz App Backend Running (SQLite)");
+  res.json({
+    status: "Backend Running",
+    database: "SQLite OK",
+  });
 });
 
 // Routes
@@ -87,6 +109,6 @@ app.use("/api/responses", responsesRoutes);
 
 // Start server
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
