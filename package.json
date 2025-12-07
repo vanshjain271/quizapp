@@ -1,5 +1,19 @@
 {
+  "name": "quizapp-root",
+  "version": "1.0.0",
+  "private": true,
   "dependencies": {
-    "joi": "^17.13.3"
+    "express": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.0",
+    "bcryptjs": "^3.0.2",
+    "jsonwebtoken": "^9.0.2",
+    "joi": "^17.13.3",
+    "lowdb": "^7.0.1",
+    "nanoid": "^4.0.2"
+  },
+  "scripts": {
+    "build": "cd backend && npm install",
+    "start": "node backend/index.js"
   }
 }
