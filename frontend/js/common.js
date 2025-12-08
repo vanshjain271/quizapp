@@ -1,4 +1,5 @@
 const API = "https://quizapp-ag92.onrender.com";
+console.log("API:", API);
 
 async function api(endpoint, method = "GET", data = null) {
     const token = localStorage.getItem('token');
