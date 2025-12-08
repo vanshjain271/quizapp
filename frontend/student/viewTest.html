@@ -25,13 +25,14 @@
             <div id="questions-list">Loading...</div>
         </div>
     </main>
+    <script src="/js/common.js"></script>
     <script>
     const urlParams = new URLSearchParams(window.location.search);
     const quiz_id = urlParams.get('quiz_id');
     const token = localStorage.getItem('token');
 
     async function loadQuestions() {
-        const res = await fetch(`http://localhost:4000/api/questions/${quiz_id}`);
+        const res = await api(`/api/questions/${quiz_id}`);
         const data = await res.json();
         const questions = data.questions || data; // Handle both new and old format
         const list = document.getElementById('questions-list');
@@ -97,7 +98,7 @@
                 if (res.status === 401) {
                     alert('Your session has expired. Please log in again.');
                     localStorage.removeItem('token');
-                    window.location.href = '../login.html';
+                    window.location.href = '/login.html';
                     return;
                 }
                 

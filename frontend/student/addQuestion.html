@@ -3,176 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>Add Question | QuizIQ</title>
-
-=======
     <title>Add Question</title>
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
-    <link rel="stylesheet" href="../../css/style1.css">
-    <link rel="stylesheet" href="../../css/style11.css">
-    <link rel="stylesheet" href="../../css/style2.css">
+    <link rel="stylesheet" href="/css/style1.css">
+    <link rel="stylesheet" href="/css/style11.css">
+    <link rel="stylesheet" href="/css/style2.css">
 </head>
-<<<<<<< HEAD
-
-<body>
-    <header>
-        <div class="navbar">
-            <!-- Correct relative path -->
-            <img src="../../assets/logo.png" alt="Logo" class="logo" />
-
-            <div class="nav-links">
-                <a href="dashboards.html" class="logo1">Dashboard</a>
-                <a href="createquiz.html" class="logo1">Create Quiz</a>
-                <a href="../login.html" class="logo1" id="logout-link">Logout</a>
-            </div>
-        </div>
-    </header>
-
-    <main class="main">
-        <div class="box">
-            <h2>Add Question</h2>
-
-            <form id="add-question-form" class="form">
-                <label for="question-text">Question:</label>
-                <textarea id="question-text" required></textarea>
-
-                <label for="option-a">Option A:</label>
-                <input type="text" id="option-a" required>
-
-                <label for="option-b">Option B:</label>
-                <input type="text" id="option-b" required>
-
-                <label for="option-c">Option C:</label>
-                <input type="text" id="option-c" required>
-
-                <label for="option-d">Option D:</label>
-                <input type="text" id="option-d" required>
-
-                <label for="correct-option">Correct Option:</label>
-                <select id="correct-option" required>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                </select>
-
-                <button type="submit" class="button1" style="margin-top: 12px;">➕ Add Question</button>
-            </form>
-
-            <button id="finish-quiz-btn" class="button1" style="background: #007bff; margin-top: 18px;">
-                ✔ Finish Quiz & Go to Dashboard
-            </button>
-        </div>
-    </main>
-
-    <script>
-        const API_BASE_URL = "http://localhost:4000";
-
-        // Role + Login guard
-        function ensureTeacher() {
-            const token = localStorage.getItem('token');
-            const role  = localStorage.getItem('role');
-
-            if (!token || role !== 'teacher') {
-                window.location.href = '../login.html';
-                return false;
-            }
-            return true;
-        }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const quiz_id = Number(urlParams.get('quiz_id'));
-
-        if (!quiz_id) {
-            alert("Quiz ID missing! Return to dashboard.");
-            window.location.href = "dashboards.html";
-        }
-
-        document.getElementById('add-question-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (!ensureTeacher()) return;
-
-            const token = localStorage.getItem('token');
-            const question_text = document.getElementById('question-text').value.trim();
-
-            const options = [
-                document.getElementById('option-a').value.trim(),
-                document.getElementById('option-b').value.trim(),
-                document.getElementById('option-c').value.trim(),
-                document.getElementById('option-d').value.trim()
-            ];
-
-            const correct_option = ['A','B','C','D'].indexOf(
-                document.getElementById('correct-option').value
-            );
-
-            if (!question_text || options.some(o => !o)) {
-                alert("Please fill all fields.");
-                return;
-            }
-
-            try {
-                const res = await fetch(`${API_BASE_URL}/api/questions`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer " + token
-                    },
-                    body: JSON.stringify({ quiz_id, question_text, options, correct_option })
-                });
-
-                const data = await res.json().catch(() => ({}));
-                if (!res.ok) throw new Error(data.error || "Failed to add question.");
-
-                alert("🎉 Question added successfully!");
-
-                // Reset fields for adding another question
-                document.getElementById('question-text').value = "";
-                document.getElementById('option-a').value = "";
-                document.getElementById('option-b').value = "";
-                document.getElementById('option-c').value = "";
-                document.getElementById('option-d').value = "";
-                document.getElementById('correct-option').selectedIndex = 0;
-                document.getElementById('question-text').focus();
-
-            } catch (err) {
-                alert("Error: " + err.message);
-            }
-        });
-
-        // Finish quiz = go to dashboard
-        document.getElementById('finish-quiz-btn').addEventListener('click', () => {
-            window.location.href = "dashboards.html";
-        });
-
-        // Logout handler
-        const logoutLink = document.getElementById('logout-link');
-        if (logoutLink) {
-            logoutLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (confirm("Logout?")) {
-                    localStorage.removeItem('token');
-                    localStorage.removeItem('role');
-                    alert("Logged out successfully.");
-                    window.location.href = "../login.html";
-                }
-            });
-        }
-
-        // Guard page load
-        ensureTeacher();
-    </script>
-</body>
-</html>
-=======
 <body>
     <header>
         <div class="navbar">
             <img src="/assets/logo.png" alt="Logo" class="logo" />
             <div class="nav-links">
-                <a href="dashboards.html" class="logo1">Dashboard</a>
-                <a href="../login.html" class="logo1">Logout</a>
+                <a href="/student/dashboards_clean.html" class="logo1">Dashboard</a>
+                <a href="/student/createquiz.html" class="logo1">Create Quiz</a>
+                <a href="/login.html" class="logo1" id="logout-link">Logout</a>
             </div>
         </div>
     </header>
@@ -260,5 +103,4 @@
     });
     </script>
 </body>
-</html> 
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
+</html>

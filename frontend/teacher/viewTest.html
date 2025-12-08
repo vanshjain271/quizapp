@@ -26,6 +26,7 @@
             </div>
         </div>
     </main>
+    <script src="/js/common.js"></script>
     <script>
     const urlParams = new URLSearchParams(window.location.search);
     const quiz_id = urlParams.get('quiz_id');
@@ -37,7 +38,7 @@
             return;
         }
         try {
-            const res = await fetch(`http://localhost:4000/api/questions/${quiz_id}`);
+            const res = await api(`/api/questions/${quiz_id}`);
             const data = await res.json();
             const questions = data.questions || data; // Handle both new and old format
             

@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Take Quiz</title>
-    <link rel="stylesheet" href="../../css/style1.css">
+    <link rel="stylesheet" href="/css/style1.css">
 </head>
 <body>
     <header>
         <div class="navbar">
             <img src="/assets/logo.png" alt="Logo" class="logo" />
             <div class="nav-links">
-                <a href="dashboards.html" class="logo1">Dashboard</a>
-                <a href="../login.html" class="logo1">Logout</a>
+                <a href="/student/dashboards_clean.html" class="logo1">Dashboard</a>
+                <a href="/login.html" class="logo1">Logout</a>
             </div>
         </div>
     </header>
@@ -33,12 +33,13 @@
                     <h3>Your Score: <span id="score"></span></h3>
                     <div id="feedback"></div>
                     <p>Thank you for taking the quiz!</p>   
-                    <a href="dashboards.html" class="button1" >Back to Dashboard</a>
+                    <a href="/student/dashboards_clean.html" class="button1" >Back to Dashboard</a>
                 </div>
                 <div id="loading">Loading quiz...</div>
             </div>
         </div>
     </main>
+    <script src="/js/common.js"></script>
     <script>
     const urlParams = new URLSearchParams(window.location.search);
     const quiz_id = urlParams.get('quiz_id');

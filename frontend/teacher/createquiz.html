@@ -43,18 +43,11 @@
         </div>
     </main>
 
-<<<<<<< HEAD
-    <script src="../../js/common.js"></script>
+    <script src="/js/common.js"></script>
     <script>
     document.getElementById('create-quiz-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         if (!ensureTeacher()) return;
-=======
-    <script>
-    document.getElementById('create-quiz-form').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const token = localStorage.getItem('token');
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
         const title = document.getElementById('title').value;
         const description = document.getElementById('description').value;
         let time_per_question = parseInt(document.getElementById('time-per-question').value, 10);
@@ -64,18 +57,7 @@
             alert('Please enter a valid time per question (minimum 5 seconds).');
             return;
         }
-<<<<<<< HEAD
         const res = await api('/api/quizzes', 'POST', { title, description, time_per_question });
-=======
-        const res = await fetch('http://localhost:4000/api/quizzes', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
-            },
-            body: JSON.stringify({ title, description, time_per_question })
-        });
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
         const quiz = await res.json();
         if (quiz && quiz.id) {
             window.location.href = `addQuestion.html?quiz_id=${quiz.id}`;
@@ -83,11 +65,7 @@
             alert('Failed to create quiz.');
         }
     });
-<<<<<<< HEAD
-
-=======
     
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
     // Logout handler
     const logoutLink = document.querySelector('.nav-links a[href="../login.html"]');
     if (logoutLink) {
@@ -95,11 +73,7 @@
             event.preventDefault();
            const confirmLogout = confirm("Are you sure you want to logout?");
             if (confirmLogout) {
-<<<<<<< HEAD
                 alert("You have been logged out successfully.");
-=======
-                alert("You have been logged out successfully."); 
->>>>>>> e81771862bcd07364949fe41b2ca02edfdfa55f3
             localStorage.removeItem('token');
             localStorage.removeItem('role');
             window.location.href = '../login.html';

@@ -1,4 +1,4 @@
-const BASE_URL = "https://quizapp-ag92.onrender.com";
+const API = "https://quizapp-ag92.onrender.com";
 
 async function api(endpoint, method = "GET", data = null) {
     const token = localStorage.getItem('token');

@@ -1,44 +1,21 @@
-# TODO: Migrate Backend to LowDB
+# Fix Relative Paths in Quiz App for Netlify Deployment
 
-## 1. Update package.json
-- Remove better-sqlite3 from dependencies
-- Add lowdb: ^7.0.1 and nanoid: ^4.0.2
-- Update scripts to only have "start": "node index.js"
-
-## 2. Update index.js
-- Remove SQLite connection code
-- Add lowdb initialization with JSONFile
-- Initialize db.data with users, quizzes, questions, responses arrays
-- Attach db and nanoid to app.locals
-
-## 3. Update routes/auth.js
-- Replace SQL INSERT for signup with db.data.users.push({ id: nanoid(), ... })
-- Replace SQL SELECT for login with filtering db.data.users
-- Handle unique email constraint manually
-
-## 4. Update routes/quizzes.js
-- Replace INSERT with push and write for creating quiz
-- Replace SELECT with filtering for getting quizzes
-- Replace DELETE with filtering out and write for deleting quiz and related questions/responses
-
-## 5. Update routes/questions.js
-- Replace INSERT with push and write for adding question
-- Replace SELECT with filtering for getting questions
-- Replace DELETE with filtering out and write for deleting question
-- Handle JSON parsing for options
-
-## 6. Update routes/responses.js
-- Replace INSERT with push and write for submitting response
-- Replace SELECT with filtering for getting responses
-- Handle JSON parsing for answers
-- Update scoring logic to use filtered data
-
-## 7. Update routes/studentResponses.js
-- Replace SELECT with filtering for getting user's responses
-- Update scoring logic
-
-## 8. Create backend/data/db.json
-- Ensure the file is created with initial structure if missing
-
-## 9. Test the changes
-- Run the server and verify routes work
+## Tasks
+- [ ] Fix frontend/index.html: Change redirect from 'pages/login.html' to '/login.html'
+- [ ] Update frontend/student/dashboards_clean.html: Change relative paths to absolute
+- [ ] Update frontend/student/createquiz.html: Change relative paths to absolute
+- [ ] Update frontend/student/addQuestion.html: Change relative paths to absolute
+- [ ] Update frontend/student/myquizzes.html: Change relative paths to absolute
+- [ ] Update frontend/student/myresults.html: Change relative paths to absolute
+- [ ] Update frontend/student/takequiz.html: Change relative paths to absolute
+- [ ] Update frontend/student/viewResults.html: Change relative paths to absolute
+- [ ] Update frontend/student/viewTest.html: Change relative paths to absolute
+- [ ] Update frontend/teacher/dashboard.html: Change relative paths to absolute
+- [ ] Update frontend/teacher/createquiz.html: Change relative paths to absolute
+- [ ] Update frontend/teacher/addQuestion.html: Change relative paths to absolute
+- [ ] Update frontend/teacher/viewResults.html: Change relative paths to absolute
+- [ ] Update frontend/teacher/viewTest.html: Change relative paths to absolute
+- [ ] Update frontend/signup.html: Fix script src="../../js/common.js" to "/js/common.js"
+- [ ] Update frontend/login.html: Fix script src="../../js/common.js" to "/js/common.js"
+- [ ] Verify _redirects file is correct
+- [ ] Test navigation and paths
