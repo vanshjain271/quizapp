@@ -8,7 +8,13 @@ async function api(endpoint, method = "GET", data = null) {
     const config = { method, headers };
     if (data) config.body = JSON.stringify(data);
     const res = await fetch(API + endpoint, config);
-    return res;
+    const text = await res.text();
+    try {
+        const json = JSON.parse(text);
+        return json;
+    } catch (err) {
+        throw new Error(`API Error: ${text}`);
+    }
 }
 
 function ensureToken() {
