@@ -1,155 +1,173 @@
-Quiz Management System – Full Stack Project
+📘 QuizIQ – Full Stack Quiz Management Platform
+🚀 Overview
 
-A fully working quiz platform built for learning, portfolio showcase, and real usage.
+QuizIQ is a full-stack quiz management platform designed for teachers and students.
+Teachers can create and manage quizzes, while students can attempt quizzes and view results.
 
-✔️ Teacher & student roles
-✔️ Authentication with JWT
-✔️ Quiz creation & auto-scoring
-✔️ SQLite storage
-✔️ Browser UI + Node API backend
-🚀 Features
-👩‍🏫 Teacher Role
+The application is deployed with:
 
-✔ Login / Signup
-✔ Create quizzes
-✔ Add questions
-✔ View submitted results & scores
+Backend: Node.js + Express + LowDB → Hosted on Render
 
-👨‍🎓 Student Role
+Frontend: Static HTML/CSS/JS → Hosted on Vercel
 
-✔ Login / Signup
-✔ Attempt quizzes
-✔ Auto-scoring
-✔ View score history
+🌐 Live Deployment
 
-🏗️ Tech Stack
-🔹 Backend
+Frontend (Vercel):
+👉 https://quizapp-vert-zeta.vercel.app
+
+Backend (Render API):
+👉 https://quizapp-backend-8zcu.onrender.com
+
+Note: Backend may take 30–60 seconds on first request due to Render free tier sleep policy.
+
+🧱 Tech Stack
+Backend
 
 Node.js
 
 Express.js
 
-SQLite
+LowDB (JSON file-based database)
 
 JWT Authentication
 
-🔹 Frontend
+CORS enabled
 
-HTML
+Frontend
 
-CSS
+HTML5
 
-JavaScript (Fetch API calls)
+CSS3
 
-📌 Project Structure
-quiz/
-├── backend/             # API server
-│   ├── routes/          # Endpoints
-│   ├── middleware/      # Auth logic
-│   ├── quiz.db          # SQLite database
-│   └── index.js         # Server entry
+Vanilla JavaScript
+
+Fetch API
+
+Token-based authentication
+
+📁 Project Structure
+quizapp/
 │
-├── pages/               # UI screens
-├── css/                 # Styling
-├── index.html           # Landing -> redirects login
-├── README.md            # Documentation
-└── package.json
+├── backend/
+│   ├── routes/
+│   ├── middleware/
+│   ├── data/
+│   │   └── db.json
+│   ├── index.js
+│   └── package.json
+│
+├── frontend/
+│   ├── css/
+│   ├── js/
+│   │   └── common.js
+│   ├── student/
+│   ├── teacher/
+│   ├── login.html
+│   ├── signup.html
+│   └── index.html
+│
+└── README.md
+🔐 Features
+👩‍🏫 Teacher
 
-⚙️ Installation & Setup
-🔹 1️⃣ Install Node.js
+Register / Login
 
-Download → https://nodejs.org/
+Create quizzes
 
-🔹 2️⃣ Backend Setup
+Add questions
+
+View results
+
+Share quiz links
+
+🎓 Student
+
+Register / Login
+
+Attempt quizzes
+
+View personal results
+
+🛠 Local Setup
+1️⃣ Clone Repository
+git clone https://github.com/vanshjain271/quizapp.git
+cd quizapp
+2️⃣ Run Backend
 cd backend
 npm install
 npm start
 
+Backend runs at:
 
-Expected output:
+http://localhost:4000
+3️⃣ Run Frontend
+cd frontend
+python3 -m http.server 5500
 
-Server running on port 4000
-SQLite database connected.
+Open in browser:
 
+http://localhost:5500/login.html
+⚠ Important Notes
+🗄 Database Persistence
 
-➡ Keep this terminal open – backend must stay running!
+This project uses LowDB (JSON file-based database).
 
-🔹 3️⃣ Run Frontend
+On Render free tier:
 
-Just open:
+File system is ephemeral.
 
-index.html
+Data may reset on redeploy or restart.
 
+For production-grade deployment, migrate to:
 
-double-click
+PostgreSQL
 
-or open via VS Code Live Server
+MongoDB
 
-Frontend redirects to login automatically.
+Supabase
 
-🔑 Default Credentials
-👨‍🏫 Teacher Account
+PlanetScale
 
-Email : test@example.com
-Password : 123456
+🔧 Deployment Configuration
+Backend (Render)
 
-(or simply register a new teacher)
+Root directory: backend
 
-📌 API Test (Optional)
+Build command: npm install
 
-Example login request:
+Start command: npm start
 
-curl -X POST http://localhost:4000/api/auth/login \
-     -H "Content-Type: application/json" \
-     -d '{"email":"test@example.com","password":"123456"}'
+Environment variable: PORT (auto provided)
 
-🗄️ Database
+Frontend (Vercel)
 
-SQLite local — auto-generated file:
+Root directory: frontend
 
-backend/quiz.db
+Framework: Other
 
+No build command required
 
-Tables include:
+📌 Future Improvements
 
-users
+Migrate from LowDB to PostgreSQL
 
-quizzes
+Add role-based dashboard enhancements
 
-questions
+Improve UI/UX
 
-responses
+Add analytics and quiz scoring insights
 
-✨ Screenshot Section
+Implement refresh token authentication
 
-(Add UI Pictures here)
+👨‍💻 Author
 
-Login page
+Vansh Jain
+Full Stack Developer | AI Enthusiast | Engineering Student
 
-Teacher dashboard
+GitHub: https://github.com/vanshjain271
 
-Student quiz UI
+📜 License
 
-👨‍💻 Developer Ideas / Roadmap
+MIT License
 
-✔ Admin role
-✔ Quiz timer
-✔ UI polish
-✔ Export results
-✔ Cloud deployment (Render / Railway)
-
-🤝 Contributing
-
-Pull requests welcome ✨
-
-📄 License
-
-MIT License — open for usage & improvement.
-
-🔥 Git Push Instructions (for beginners)
-git init
-git add .
-git commit -m "Initial Quiz project"
-git branch -M main
-git remote add origin https://github.com/your-repo.git
-git push -u origin main
+Copyright (c) 2026 Vansh Jain
