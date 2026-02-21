@@ -1,173 +1,156 @@
-📘 QuizIQ – Full Stack Quiz Management Platform
-🚀 Overview
+Quiz Management System – Full Stack Project
 
-QuizIQ is a full-stack quiz management platform designed for teachers and students.
-Teachers can create and manage quizzes, while students can attempt quizzes and view results.
+A fully working quiz platform built for learning, portfolio showcase, and real usage.
 
-The application is deployed with:
+✔️ Teacher & student roles
+✔️ Authentication with JWT
+✔️ Quiz creation & auto-scoring
+✔️ SQLite storage
+✔️ Browser UI + Node API backend
+🚀 Features
+👩‍🏫 Teacher Role
 
-Backend: Node.js + Express + LowDB → Hosted on Render
+✔ Login / Signup
+✔ Create quizzes
+✔ Add questions
+✔ View submitted results & scores
 
-Frontend: Static HTML/CSS/JS → Hosted on Vercel
+👨‍🎓 Student Role
 
-🌐 Live Deployment
+✔ Login / Signup
+✔ Attempt quizzes
+✔ Auto-scoring
+✔ View score history
 
-Frontend (Vercel):
-👉 https://quizapp-vert-zeta.vercel.app
-
-Backend (Render API):
-👉 https://quizapp-backend-8zcu.onrender.com
-
-Note: Backend may take 30–60 seconds on first request due to Render free tier sleep policy.
-
-🧱 Tech Stack
-Backend
+🏗️ Tech Stack
+🔹 Backend
 
 Node.js
 
 Express.js
 
-LowDB (JSON file-based database)
+SQLite
 
 JWT Authentication
 
-CORS enabled
+🔹 Frontend
 
-Frontend
+HTML
 
-HTML5
+CSS
 
-CSS3
+JavaScript (Fetch API calls)
 
-Vanilla JavaScript
-
-Fetch API
-
-Token-based authentication
-
-📁 Project Structure
-quizapp/
+📌 Project Structure
+quiz/
+├── backend/             # API server
+│   ├── routes/          # Endpoints
+│   ├── middleware/      # Auth logic
+│   ├── quiz.db          # SQLite database
+│   └── index.js         # Server entry
 │
-├── backend/
-│   ├── routes/
-│   ├── middleware/
-│   ├── data/
-│   │   └── db.json
-│   ├── index.js
-│   └── package.json
-│
-├── frontend/
-│   ├── css/
-│   ├── js/
-│   │   └── common.js
-│   ├── student/
-│   ├── teacher/
-│   ├── login.html
-│   ├── signup.html
-│   └── index.html
-│
-└── README.md
-🔐 Features
-👩‍🏫 Teacher
+├── pages/               # UI screens
+├── css/                 # Styling
+├── index.html           # Landing -> redirects login
+├── README.md            # Documentation
+└── package.json
 
-Register / Login
+⚙️ Installation & Setup
+🔹 1️⃣ Install Node.js
 
-Create quizzes
+Download → https://nodejs.org/
 
-Add questions
-
-View results
-
-Share quiz links
-
-🎓 Student
-
-Register / Login
-
-Attempt quizzes
-
-View personal results
-
-🛠 Local Setup
-1️⃣ Clone Repository
-git clone https://github.com/vanshjain271/quizapp.git
-cd quizapp
-2️⃣ Run Backend
+🔹 2️⃣ Backend Setup
 cd backend
 npm install
 npm start
 
-Backend runs at:
 
-http://localhost:4000
-3️⃣ Run Frontend
-cd frontend
-python3 -m http.server 5500
+Expected output:
 
-Open in browser:
+Server running on port 4000
+SQLite database connected.
 
-http://localhost:5500/login.html
-⚠ Important Notes
-🗄 Database Persistence
 
-This project uses LowDB (JSON file-based database).
+➡ Keep this terminal open – backend must stay running!
 
-On Render free tier:
+🔹 3️⃣ Run Frontend
 
-File system is ephemeral.
+Just open:
 
-Data may reset on redeploy or restart.
+index.html
 
-For production-grade deployment, migrate to:
 
-PostgreSQL
+double-click
 
-MongoDB
+or open via VS Code Live Server
 
-Supabase
+Frontend redirects to login automatically.
 
-PlanetScale
+🔑 Default Credentials
+👨‍🏫 Teacher Account
 
-🔧 Deployment Configuration
-Backend (Render)
+Email : test@example.com
+Password : 123456
 
-Root directory: backend
+(or simply register a new teacher)
 
-Build command: npm install
+📌 API Test (Optional)
 
-Start command: npm start
+Example login request:
 
-Environment variable: PORT (auto provided)
+curl -X POST http://localhost:4000/api/auth/login \
+     -H "Content-Type: application/json" \
+     -d '{"email":"test@example.com","password":"123456"}'
 
-Frontend (Vercel)
+🗄️ Database
 
-Root directory: frontend
+LowDB JSON file-based — auto-generated file:
 
-Framework: Other
+backend/data/db.json
 
-No build command required
+⚠️ Production Note: LowDB uses a file-based JSON database. On Render free tier, filesystem is ephemeral. Data may reset on redeploy or restart. For production, consider upgrading to a persistent database like MongoDB or PostgreSQL.
 
-📌 Future Improvements
+Schema includes:
 
-Migrate from LowDB to PostgreSQL
+users
 
-Add role-based dashboard enhancements
+quizzes
 
-Improve UI/UX
+questions
 
-Add analytics and quiz scoring insights
+responses
 
-Implement refresh token authentication
+✨ Screenshot Section
 
-👨‍💻 Author
+(Add UI Pictures here)
 
-Vansh Jain
-Full Stack Developer | AI Enthusiast | Engineering Student
+Login page
 
-GitHub: https://github.com/vanshjain271
+Teacher dashboard
 
-📜 License
+Student quiz UI
 
-MIT License
+👨‍💻 Developer Ideas / Roadmap
 
-Copyright (c) 2026 Vansh Jain
+✔ Admin role
+✔ Quiz timer
+✔ UI polish
+✔ Export results
+✔ Cloud deployment (Render / Railway)
+
+🤝 Contributing
+
+Pull requests welcome ✨
+
+📄 License
+
+MIT License — open for usage & improvement.
+
+🔥 Git Push Instructions (for beginners)
+git init
+git add .
+git commit -m "Initial Quiz project"
+git branch -M main
+git remote add origin https://github.com/your-repo.git
+git push -u origin main
