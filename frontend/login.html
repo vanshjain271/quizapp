@@ -52,9 +52,8 @@
             const email = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             try {
-                const res = await api('/api/auth/login', 'POST', { email, password });
-                const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Login failed');
+                const data = await api('/api/auth/login', 'POST', { email, password });
+                if (data.error) throw new Error(data.error || 'Login failed');
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("role", data.role);
                 alert('Logged in as ' + data.role);

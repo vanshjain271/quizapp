@@ -112,12 +112,9 @@
             quizList.innerHTML = '<p style="text-align:center;margin-top:1rem;">Loading quizzes...</p>';
 
             try {
-                const res = await api('/api/quizzes');
-                if (!res.ok) {
-                    throw new Error('Failed to load quizzes');
-                }
+                const quizzes = await api('/api/quizzes');
+                if (quizzes.error) throw new Error(quizzes.error || 'Failed to load quizzes');
 
-                const quizzes = await res.json();
                 quizList.innerHTML = '';
 
                 if (!Array.isArray(quizzes) || quizzes.length === 0) {
@@ -149,17 +146,10 @@
             const myQuizList = document.getElementById('my-quizzes-list');
             if (!myQuizList) return; // this page doesn't have that section yet
 
-            const token = localStorage.getItem('token');
-            if (!token) return;
-
             try {
-                const res = await api('/api/quizzes/my', 'GET', null, true);
+                const quizzes = await api('/api/quizzes/my');
+                if (quizzes.error) throw new Error(quizzes.error || 'Failed to load your quizzes');
 
-                if (!res.ok) {
-                    throw new Error('Failed to load your quizzes');
-                }
-
-                const quizzes = await res.json();
                 myQuizList.innerHTML = '';
 
                 if (!Array.isArray(quizzes) || quizzes.length === 0) {

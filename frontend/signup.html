@@ -76,10 +76,9 @@ document.getElementById('register-form').addEventListener('submit', async functi
     }
 
     try {
-        const res = await api('/api/auth/register', 'POST', { email, password, role });
-        const data = await res.json();
+        const data = await api('/api/auth/register', 'POST', { email, password, role });
 
-        if (!res.ok) throw new Error(data.error || 'Signup failed');
+        if (data.error) throw new Error(data.error || 'Signup failed');
 
         alert('Signup successful! Please login.');
         window.location.href = '/login.html';
