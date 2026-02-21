@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Take Quiz</title>
-    <link rel="stylesheet" href="/css/style1.css">
+    <link rel="stylesheet" href="../css/style1.css">
 </head>
 <body>
     <header>
         <div class="navbar">
-            <img src="/assets/logo.png" alt="Logo" class="logo" />
+            <img src="../assets/logo.png" alt="Logo" class="logo" />
             <div class="nav-links">
-                <a href="/student/dashboards_clean.html" class="logo1">Dashboard</a>
-                <a href="/login.html" class="logo1">Logout</a>
+                <a href="dashboards_clean.html" class="logo1">Dashboard</a>
+                <a href="../login.html" class="logo1">Logout</a>
             </div>
         </div>
     </header>
@@ -33,13 +33,13 @@
                     <h3>Your Score: <span id="score"></span></h3>
                     <div id="feedback"></div>
                     <p>Thank you for taking the quiz!</p>   
-                    <a href="/student/dashboards_clean.html" class="button1" >Back to Dashboard</a>
+                    <a href="dashboards_clean.html" class="button1" >Back to Dashboard</a>
                 </div>
                 <div id="loading">Loading quiz...</div>
             </div>
         </div>
     </main>
-    <script src="/js/common.js"></script>
+    <script src="../js/common.js"></script>
     <script>
     const urlParams = new URLSearchParams(window.location.search);
     const quiz_id = urlParams.get('quiz_id');
@@ -133,13 +133,7 @@
             window.location.href = '../login.html';
             return;
         }
-        await api('/api/responses', 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
-            },
-            body: JSON.stringify({ quiz_id: Number(quiz_id), answers })
-        });
+        await api('/api/responses', 'POST', { quiz_id: Number(quiz_id), answers });
         document.getElementById('question-section').style.display = 'none';
         document.getElementById('result-section').style.display = 'block';
         document.getElementById('score').textContent = `${score} / ${questions.length}`;

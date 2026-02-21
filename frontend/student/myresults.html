@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title  style="text-align: center; margin-top:1%;">My Results</title>
-    <link rel="stylesheet" href="../../css/style1.css">
+    <link rel="stylesheet" href="../css/style1.css">
     <style>
         .result-card {
             background: white;
@@ -27,7 +27,7 @@
 <body>
     <header>
         <div class="navbar">
-            <img src="/assets/logo.png" alt="Logo" class="logo" />
+            <img src="../assets/logo.png" alt="Logo" class="logo" />
             <div class="nav-links">
                 <a href="dashboards.html" class="logo1">Dashboard</a>
                 <a href="myresults.html" class="logo1">My Results</a>
@@ -45,13 +45,12 @@
             </div>
         </div>
     </main>
+    <script src="../js/common.js"></script>
     <script>
     async function loadMyResults() {
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch('http://localhost:4000/api/studentResponses/mine', {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
+            const res = await api('/api/studentResponses/mine');
             const results = await res.json();
             const resultsList = document.getElementById('my-results');
             resultsList.innerHTML = '';

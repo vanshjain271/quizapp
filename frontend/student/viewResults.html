@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Results</title>
-    <link rel="stylesheet" href="../../css/style1.css">
+    <link rel="stylesheet" href="../css/style1.css">
     <style>
         table {
             width: 100%;
@@ -24,13 +24,13 @@
 <body>
     <header>
         <div class="navbar">
-            <img src="/assets/logo.png" alt="Logo" class="logo" />
+            <img src="../assets/logo.png" alt="Logo" class="logo" />
             <div class="nav-links">
-                <a href="/student/dashboards_clean.html" class="logo1">Dashboard</a>
-                <a href="/student/myresults.html" class="logo1">My Results</a>
-                <a href="/student/myquizzes.html" class="logo1">My Quizzes</a>
-                <a href="/student/createquiz.html" class="logo1">Create Quiz</a>
-                <a href="/login.html" class="logo1">Logout</a>
+                <a href="dashboards_clean.html" class="logo1">Dashboard</a>
+                <a href="myresults.html" class="logo1">My Results</a>
+                <a href="myquizzes.html" class="logo1">My Quizzes</a>
+                <a href="createquiz.html" class="logo1">Create Quiz</a>
+                <a href="../login.html" class="logo1">Logout</a>
             </div>
         </div>
     </header>
@@ -39,11 +39,11 @@
             <h2>Quiz Results</h2>
             <div id="results-container">Loading results...</div>
             <div class="button">
-                <a href="/student/myquizzes.html" class="button1">Back to My Quizzes</a>
+                <a href="myquizzes.html" class="button1">Back to My Quizzes</a>
             </div>
         </div>
     </main>
-    <script src="/js/common.js"></script>
+    <script src="../js/common.js"></script>
     <script>
     const urlParams = new URLSearchParams(window.location.search);
     const quiz_id = urlParams.get('quiz_id');

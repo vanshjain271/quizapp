@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Results</title>
-    <link rel="stylesheet" href="/css/style1.css">
+    <link rel="stylesheet" href="../css/style1.css">
 </head>
 <body>
     <header>
         <div class="navbar">
-            <img src="/assets/logo.png" alt="Logo" class="logo" />
+            <img src="../assets/logo.png" alt="Logo" class="logo" />
             <div class="nav-links">
                 <a href="dashboard.html" class="logo1">Dashboard</a>
                 <a href="createquiz.html" class="logo1">Create Quiz</a>
@@ -26,6 +26,7 @@
             </div>
         </div>
     </main>
+    <script src="../js/common.js"></script>
     <script>
     const urlParams = new URLSearchParams(window.location.search);
     const quiz_id = urlParams.get('quiz_id');
@@ -41,9 +42,7 @@
             return;
         }
         try {
-            const res = await fetch(`http://localhost:4000/api/responses/all/${quiz_id}`, {
-                headers: { 'Authorization': 'Bearer ' + token }
-            });
+            const res = await api(`/api/responses/all/${quiz_id}`);
             const data = await res.json();
             if (!Array.isArray(data)) {
                 document.getElementById('results-container').innerHTML = 'No results found or not authorized.';

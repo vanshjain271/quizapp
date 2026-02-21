@@ -1,4 +1,10 @@
-const API = "https://quizapp-ag92.onrender.com";
+const BASE_URL =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+    ? "http://localhost:4000"
+    : "https://quizapp-backend-8zcu.onrender.com";
+
+const API = BASE_URL;
 console.log("API:", API);
 
 async function api(endpoint, method = "GET", data = null) {

@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuizIQ.com | Student Dashboard</title>
 
-    <!-- from /pages/student/dashboards.html → /css -->
-    <link rel="stylesheet" href="/css/style1.css">
+    <link rel="stylesheet" href="../css/style1.css">
     <style>
         .quiz-card {
             background: white;
@@ -40,8 +39,7 @@
 <body>
     <header>
         <div class="navbar">
-            <!-- from /pages/student → /assets -->
-            <img src="/assets/logo.png" alt="Logo" class="logo" />
+            <img src="../assets/logo.png" alt="Logo" class="logo" />
             <div class="nav-links">
                 <a href="dashboards.html" class="logo1">Dashboard</a>
                 <a href="myresults.html" class="logo1">My Results</a>
@@ -84,7 +82,7 @@
         </div>
     </div>
 
-    <script src="/js/common.js"></script>
+    <script src="../js/common.js"></script>
     <script>
         let targetUrl = "";
 
@@ -190,7 +188,7 @@
 
         function copyQuizLink(quizId) {
             const baseUrl = window.location.origin || '';
-            const shareUrl = `${baseUrl}/pages/student/takequiz.html?quiz_id=${quizId}`;
+            const shareUrl = `${baseUrl}/student/takequiz.html?quiz_id=${quizId}`;
             navigator.clipboard.writeText(shareUrl).then(() => {
                 alert('Quiz link copied to clipboard!');
             }).catch(() => {

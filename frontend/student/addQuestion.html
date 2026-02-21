@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Question</title>
-    <link rel="stylesheet" href="/css/style1.css">
-    <link rel="stylesheet" href="/css/style11.css">
-    <link rel="stylesheet" href="/css/style2.css">
+    <link rel="stylesheet" href="../css/style1.css">
+    <link rel="stylesheet" href="../css/style11.css">
+    <link rel="stylesheet" href="../css/style2.css">
 </head>
 <body>
     <header>
         <div class="navbar">
-            <img src="/assets/logo.png" alt="Logo" class="logo" />
+            <img src="../assets/logo.png" alt="Logo" class="logo" />
             <div class="nav-links">
                 <a href="/student/dashboards_clean.html" class="logo1">Dashboard</a>
                 <a href="/student/createquiz.html" class="logo1">Create Quiz</a>
@@ -56,6 +56,7 @@
             </form>
         </div>
     </main>
+    <script src="../js/common.js"></script>
     <script>
     const urlParams = new URLSearchParams(window.location.search);
     const quiz_id = Number(urlParams.get('quiz_id'));
@@ -79,14 +80,7 @@
             return;
         }
         try {
-            const res = await fetch('http://localhost:4000/api/questions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                },
-                body: JSON.stringify({ quiz_id, question_text, options, correct_option })
-            });
+            const res = await api('/api/questions', 'POST', { quiz_id, question_text, options, correct_option });
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || 'Question addition failed');
             alert('Question added successfully!');
